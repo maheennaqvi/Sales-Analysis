@@ -112,7 +112,7 @@ sales_by_year_tbl%>%
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
     
-    <img src="Screenshot1ggplot.png" width="800" />
+    knitr::include_graphics("images/Screenshot1ggplot.png.png")
     
 # Step 2 - Visualize
     theme_tq() +
