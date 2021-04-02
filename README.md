@@ -1,3 +1,3 @@
 # Sales-Analysis-with-R
 
-![](ales-Analysis-with-R/blob/main/images/Screenshot1ggplot.png?raw=true)
+![](main/Sales-Analysis-with-R/images/Screenshot1ggplot.png)
