@@ -1,7 +1,7 @@
 # Sales-Analysis-with-R
 
 
-'''r
+```{r, echo=FALSE}
 
 R FOR BUSINESS ANALYSIS
 JUMPSTART 
