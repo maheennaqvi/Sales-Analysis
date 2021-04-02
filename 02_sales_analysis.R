@@ -122,6 +122,7 @@ sales_by_year_tbl%>%
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
     
+![Alt text](/MaheenAbbas/Sales-Analysis-with-R/SalesAnalysisWithgglot-1.png?raw=true "Optional Title")
    
     
 # Step 2 - Visualize
