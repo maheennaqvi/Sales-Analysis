@@ -122,7 +122,7 @@ sales_by_year_tbl%>%
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
     
-![](images/SalesAnalysisWithgglot-1.png)
+![](images/Screenshot1ggplot.png)
     
 # Step 2 - Visualize
     theme_tq() +
