@@ -123,7 +123,7 @@ sales_by_year_tbl%>%
     #formatting 
     
 ![Alt Text](https://raw.github.com/{MaheenAbbas}/{Sales-Analysis-with-R
-}/{02_sales_analysis.R}/{SalesAnalysisWithgglot-1.png})
+}/{sales_analysis.R}/{SalesAnalysisWithgglot-1.png})
    
     
 # Step 2 - Visualize
