@@ -126,13 +126,10 @@ sales_by_year_tbl%>%
     geom_label(aes(label = sales_text)) +
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
+![SalesAnalysisWithgglot-1](https://user-images.githubusercontent.com/81388494/113442357-e5e4a100-93bd-11eb-9d07-12c8b020c868.png)
 
-'''
 
 
-![](https://
-hub.com/MaheenAbbas/Sales-Analysis-with-R/blob/main/images/Screenshot1ggplot.png?raw=true)
-    
 # Step 2 - Visualize
     theme_tq() +
     scale_y_continuous(labels = scales::dollar) +
