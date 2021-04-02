@@ -138,7 +138,7 @@ sales_by_year_tbl%>%
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
     
-   ![](https://github.com/MaheenAbbas/Sales-Analysis-with-R/blob/main/images/Screenshot1ggplot.png?raw=true)
+    <img src="Screenshot1ggplot.png" width="800" />
     
 # Step 2 - Visualize
     theme_tq() +
