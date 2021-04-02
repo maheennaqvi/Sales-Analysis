@@ -1,6 +1,8 @@
 # Sales-Analysis-with-R
 
 
+'''R
+
 R FOR BUSINESS ANALYSIS
 JUMPSTART 
 
@@ -124,7 +126,7 @@ sales_by_year_tbl%>%
     geom_label(aes(label = sales_text)) +
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
-    
+'''
 
 ![](https://
 hub.com/MaheenAbbas/Sales-Analysis-with-R/blob/main/images/Screenshot1ggplot.png?raw=true)
