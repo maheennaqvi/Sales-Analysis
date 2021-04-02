@@ -1,8 +1,8 @@
 # Sales-Analysis-with-R
 
 
-# R FOR BUSINESS ANALYSIS
-# JUMPSTART 
+R FOR BUSINESS ANALYSIS
+JUMPSTART 
 
 # 1.0 Load the following libraries 
 
@@ -126,7 +126,8 @@ sales_by_year_tbl%>%
     #formatting 
     
 
-![](https://github.com/MaheenAbbas/Sales-Analysis-with-R/blob/main/images/Screenshot1ggplot.png?raw=true)
+![](https://
+hub.com/MaheenAbbas/Sales-Analysis-with-R/blob/main/images/Screenshot1ggplot.png?raw=true)
     
 # Step 2 - Visualize
     theme_tq() +
@@ -182,14 +183,13 @@ sales_by_year_cat_2_tbl %>%
 
 
 
-# 7.0 Writing Files ----
-#
+7.0 Writing Files ----
+
 fs::dir_create("00_data/bike_sales/data_wrangled_student")
-# 7.1 Excel ----
+7.1 Excel ----
 bike_orderlines_wrangled_tbl %>% 
     write_xlsx("00_data/bike_sales/data_wrangled_student/bike_orderlines.xlsx")
-
-# 7.2 CSV 
+7.2 CSV 
 bike_orderlines_wrangled_tbl %>%
     write_csv("00_data/bike_sales/data_wrangled_student/bike_orderlines.csv")
 # 7.3 RDS ----
