@@ -1,7 +1,7 @@
 # Sales-Analysis-with-R
 
 
-'''R
+'''r
 
 R FOR BUSINESS ANALYSIS
 JUMPSTART 
