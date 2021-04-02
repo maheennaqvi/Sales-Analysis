@@ -3,8 +3,8 @@
 
 ```{r}
 
-R FOR BUSINESS ANALYSIS
-JUMPSTART 
+#R FOR BUSINESS ANALYSIS
+#JUMPSTART 
 
 # 1.0 Load the following libraries 
 
