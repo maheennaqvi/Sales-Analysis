@@ -1,38 +1,55 @@
-02_sales_analysis
-R Markdown
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. When you click the Knit button a document will be generated that includes both contents as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
 # R FOR BUSINESS ANALYSIS
 # JUMPSTART 
 
-#1.0 Load the following libraries 
-#Work horse packages
+# 1.0 Load the following libraries 
+
+# Work horse packages
 library(tidyverse)
 library(lubridate)
+
+# theme_tq()
 library(tidyquant)
 
-#Excel Files
+# Excel Files
 library(readxl)
 library(writexl)
 
-#2.0 Import the files
-#? and some function can tell you the description about that specific function
+# 2.0 Import the files
+# ? and some function can tell you the description about that specific function
 ?read_excel()
+
 bikes_tbl <- read_excel(path = "00_data/bike_sales/data_raw/bikes.xlsx")
+
 bikeshops_tbl <- read_excel(path = "00_data/bike_sales/data_raw/bikeshops.xlsx")
+
 orderlines_tbl <- read_excel(path = "00_data/bike_sales/data_raw/orderlines.xlsx")
+
+# 3.0 Examining the data from the files
+ # view using glimpse function
+glimpse(bikes_tbl)
+
 bikeshops_tbl
+
 orderlines_tbl
 
-#4.0 Joining Data ----
+# 4.0 Joining Data ----
 ?left_join
+
 orderlines_tbl
+
 bikes_tbl
+
+left_join(orderlines_tbl, bikes_tbl, by = c ("product.id" = "bike.id"))
+
 bike_orderlines_joined_tbl <- orderlines_tbl %>%
     left_join(bikes_tbl, by = c ("product.id" = "bike.id")) %>%
     left_join(bikeshops_tbl, by = c ("customer.id" = "bikeshop.id"))
 
-#5.0 Wrangling Data
+bike_orderlines_joined_tbl
+
+bike_orderlines_joined_tbl %>% glimpse()
+
+# 5.0 Wrangling Data
 bike_orderlines_wrangled_tbl <- bike_orderlines_joined_tbl %>%
 #separate description into category.1, category.2 and frame.material
 
@@ -45,9 +62,9 @@ separate(description,
              into = c ("city", "state"),
              sep = ", ",
              remove = FALSE) %>%
-#price extended/ mutate function
+# price extended/ mutate function
     mutate(total.price = price * quantity) %>%
-#%>% means to pipe into- connect 
+# %>% means to pipe into- connect 
     
 #reorganize- delete a column by using select (-) 
     select(-...1, -location) %>%
@@ -68,13 +85,19 @@ separate(description,
     set_names(names(.) %>% str_replace_all("\\.", "_")) 
 #regular expression- taking a string operation 
     #toupper ()) %>%
-   #names() %>%
+   # names() %>%
     
     #view and glimpse are the same
     #glimpse()
   
 bike_orderlines_wrangled_tbl %>% glimpse()
 
+# 6.0 Business Insights ----
+
+
+# 6.1 Sales by Year ----
+
+# Step 1 - Manipulate
 sales_by_year_tbl <- bike_orderlines_wrangled_tbl %>% 
     #selecting columns to focus on
     select(order_date, total_price) %>%
@@ -85,7 +108,10 @@ sales_by_year_tbl <- bike_orderlines_wrangled_tbl %>%
     summarize(sales = sum(total_price)) %>%
     ungroup() %>%
     
- 
+    #$ format text 
+    mutate(sales_text = scales::dollar(sales))
+
+sales_by_year_tbl 
 
 sales_by_year_tbl%>%  
     #setup the canvas with year on x-axis and sales on y-axis
@@ -96,10 +122,9 @@ sales_by_year_tbl%>%
     geom_smooth(method = "lm", se = FALSE) +
     #formatting 
     
-  ![SalesAnalysisWithgglot-1](https://user-images.githubusercontent.com/81388494/113446507-e41edb80-93c5-11eb-8ac5-a430c4d42bbc.png)
- 
+    ![SalesAnalysisWithgglot-1](https://user-images.githubusercontent.com/81388494/113446507-e41edb80-93c5-11eb-8ac5-a430c4d42bbc.png)
     
-#Step 2 - Visualize
+# Step 2 - Visualize
     theme_tq() +
     scale_y_continuous(labels = scales::dollar) +
     labs(
@@ -109,13 +134,11 @@ sales_by_year_tbl%>%
         y = "Revenue"
     )
 
-![SalesAnalysisWithgglot-2](https://user-images.githubusercontent.com/81388494/113446536-f1d46100-93c5-11eb-999d-b49dd34e88a4.png)
+
+# 6.2 Sales by Year and Category 2 ----
 
 
-
-#6.2 Sales by Year and Category 2 ----
-
-#Step 1 - Manipulate
+# Step 1 - Manipulate
 sales_by_year_cat_2_tbl <-bike_orderlines_wrangled_tbl %>%
     #selecting the col to focus on and year col 
     select(order_date, total_price, category_2) %>%
@@ -129,7 +152,10 @@ sales_by_year_cat_2_tbl <-bike_orderlines_wrangled_tbl %>%
     #format $ Text 
     mutate(sale_text = scales::dollar(sales))
 
-#Step 2 - Visualize
+
+
+
+# Step 2 - Visualize
 sales_by_year_cat_2_tbl %>%
     ggplot(aes(x = year, y = sales, fill = category_2)) +
     #geometries 
@@ -150,19 +176,20 @@ sales_by_year_cat_2_tbl %>%
     )
 
 
-#7.0 Writing Files ----
+![SalesAnalysisWithgglot-2](https://user-images.githubusercontent.com/81388494/113446536-f1d46100-93c5-11eb-999d-b49dd34e88a4.png)
+
+
+# 7.0 Writing Files ----
 #
 fs::dir_create("00_data/bike_sales/data_wrangled_student")
-#7.1 Excel ----
+# 7.1 Excel ----
 bike_orderlines_wrangled_tbl %>% 
     write_xlsx("00_data/bike_sales/data_wrangled_student/bike_orderlines.xlsx")
 
-#7.2 CSV 
+# 7.2 CSV 
 bike_orderlines_wrangled_tbl %>%
     write_csv("00_data/bike_sales/data_wrangled_student/bike_orderlines.csv")
-#7.3 RDS ----
+# 7.3 RDS ----
 
 bike_orderlines_wrangled_tbl %>%
     write_rds("00_data/bike_sales/data_wrangled_student/bike_orderlines.rds")
-
-
