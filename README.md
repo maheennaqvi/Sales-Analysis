@@ -1,17 +1,14 @@
 02_sales_analysis
 R Markdown
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. When you click the Knit button a document will be generated that includes both contents as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 # R FOR BUSINESS ANALYSIS
 # JUMPSTART 
 
 # 1.0 Load the following libraries 
-
 # Work horse packages
 library(tidyverse)
-
 library(lubridate)
-
 library(tidyquant)
 
 # Excel Files
@@ -21,30 +18,19 @@ library(writexl)
 # 2.0 Import the files
 # ? and some function can tell you the description about that specific function
 ?read_excel()
-
 bikes_tbl <- read_excel(path = "00_data/bike_sales/data_raw/bikes.xlsx")
-
 bikeshops_tbl <- read_excel(path = "00_data/bike_sales/data_raw/bikeshops.xlsx")
-
 orderlines_tbl <- read_excel(path = "00_data/bike_sales/data_raw/orderlines.xlsx")
-## New names:
-## * `` -> ...1
-
 bikeshops_tbl
-
 orderlines_tbl
 
 # 4.0 Joining Data ----
 ?left_join
-
 orderlines_tbl
-
 bikes_tbl
-
 bike_orderlines_joined_tbl <- orderlines_tbl %>%
     left_join(bikes_tbl, by = c ("product.id" = "bike.id")) %>%
     left_join(bikeshops_tbl, by = c ("customer.id" = "bikeshop.id"))
-
 
 # 5.0 Wrangling Data
 bike_orderlines_wrangled_tbl <- bike_orderlines_joined_tbl %>%
@@ -99,8 +85,7 @@ sales_by_year_tbl <- bike_orderlines_wrangled_tbl %>%
     summarize(sales = sum(total_price)) %>%
     ungroup() %>%
     
-    #$ format text 
-    mutate(sales_text = scales::dollar(sales))
+ 
 
 sales_by_year_tbl%>%  
     #setup the canvas with year on x-axis and sales on y-axis
@@ -144,7 +129,7 @@ sales_by_year_cat_2_tbl <-bike_orderlines_wrangled_tbl %>%
     
     #format $ Text 
     mutate(sale_text = scales::dollar(sales))
-## `summarise()` regrouping output by 'year' (override with `.groups` argument)
+
 # Step 2 - Visualize
 sales_by_year_cat_2_tbl %>%
     ggplot(aes(x = year, y = sales, fill = category_2)) +
@@ -164,7 +149,6 @@ sales_by_year_cat_2_tbl %>%
         fill = "Product Secondary Catergory"
         
     )
-## `geom_smooth()` using formula 'y ~ x'
 
 
 # 7.0 Writing Files ----
@@ -181,3 +165,5 @@ bike_orderlines_wrangled_tbl %>%
 
 bike_orderlines_wrangled_tbl %>%
     write_rds("00_data/bike_sales/data_wrangled_student/bike_orderlines.rds")
+
+
